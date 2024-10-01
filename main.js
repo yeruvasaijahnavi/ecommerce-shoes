@@ -1,6 +1,6 @@
 // -------------------- Cart-related --------------------
 const shoppingCart = document.getElementById("cart");
-const productPreview = document.getElementById("card");
+const cartPreview = document.getElementById("card");
 const addToCartBtn = document.getElementById("add-to-cart");
 const itemCount = document.getElementById("cart-number");
 const totalItems = document.getElementById("number-of-items");
@@ -11,14 +11,26 @@ const cartDetails = document.getElementById("cart-info");
 const deleteItemBtn = document.getElementById("icon-delete");
 
 shoppingCart.addEventListener("click", () => {
-    productPreview.classList.toggle("hidden");
+    cartPreview.classList.toggle("hidden");
 });
 
 addToCartBtn.addEventListener("click", () => {
+    if (counter.textContent <= 0) {
+        notification.classList.remove("hidden"); // Show the notification bubble
+
+        // Hide the notification after 3 seconds
+        setTimeout(() => {
+            notification.classList.add("hidden");
+        }, 3000);
+
+        return; // Exit the function if quantity is 0
+    }
+    const currentCount = Number(counter.textContent);
     // Show number of items ordered in cart if order is greater than one else hide the number of items
     if (counter.textContent > 0) {
         itemCount.classList.remove("hidden");
-        itemCount.textContent = 1;
+        itemCount.textContent =
+            (Number(itemCount.textContent) || 0) + currentCount;
         clearCartBtn.classList.add("hidden");
         cartDetails.classList.remove("hidden");
     } else {
@@ -28,7 +40,7 @@ addToCartBtn.addEventListener("click", () => {
     }
 
     // Update the number of items in cart modal
-    totalItems.textContent = counter.textContent;
+    totalItems.textContent = itemCount.textContent; // Show the updated count in the modal
 
     // Calculate the total amount to be paid
     let calculatedAmount =
@@ -43,6 +55,13 @@ deleteItemBtn.addEventListener("click", () => {
     cartDetails.classList.add("hidden");
     clearCartBtn.classList.remove("hidden");
 });
+
+// Click anywhere outside card to close
+document.onclick = function (e) {
+    if (e.target.id !== "cart") {
+        cartPreview.classList.add("hidden");
+    }
+};
 
 // ------------------Mobile Menu ------------------
 // Menu Toggle
