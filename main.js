@@ -1,8 +1,3 @@
-const thumbBtns = document.querySelectorAll(".thumbnails");
-const cartImg = document.getElementById("cart-img");
-const prevBtns = document.querySelectorAll(".previous");
-const nextBtns = document.querySelectorAll(".next");
-
 // -------------------- Cart-related --------------------
 const cart = document.getElementById("cart");
 const previewCard = document.getElementById("card");
@@ -16,7 +11,7 @@ const cartInfo = document.getElementById("cart-info");
 const removeItem = document.getElementById("icon-delete");
 
 cart.addEventListener("click", () => {
-    previewCard.classList.remove("hidden");
+    previewCard.classList.toggle("hidden");
 });
 
 addCart.addEventListener("click", () => {
@@ -82,26 +77,21 @@ iconMinus.addEventListener("click", () => {
     }
 });
 
-// Click outside an area to close
-document.onclick = function (e) {
-    if (e.target.id !== "cart") {
-        previewCard.classList.add("hidden");
-    }
-};
-
 // -----------------Lightbox Toggle  --------------------
 const backdrop = document.getElementById("lightbox");
-const hideBackdrop = document.getElementById("close-lightbox");
+const closeLightboxBtn = document.getElementById("close-lightbox");
 const images = document.querySelectorAll(".light-box-image");
 const img = document.getElementById("lightbox-image");
 const heroImg = document.getElementById("main-img");
 
-hideBackdrop.addEventListener("click", () => {
-    backdrop.classList.add("hidden");
-});
-
+// show lightbox
 heroImg.addEventListener("click", () => {
     backdrop.classList.remove("hidden");
+});
+
+// close lightbox
+closeLightboxBtn.addEventListener("click", () => {
+    backdrop.classList.add("hidden");
 });
 
 // display lightbox if img is clicked in desktop mode
@@ -123,8 +113,11 @@ thumbBtns.forEach((thumb) => {
     });
 });
 
-// Slider
-
+// -------------------- Thumbnail Slider --------------------
+const thumbBtns = document.querySelectorAll(".thumbnails");
+const cartImg = document.getElementById("cart-img");
+const prevBtns = document.querySelectorAll(".previous");
+const nextBtns = document.querySelectorAll(".next");
 let imageGallery = [
     "images/product/image-product-1.jpg",
     "images/product/image-product-2.jpg",
