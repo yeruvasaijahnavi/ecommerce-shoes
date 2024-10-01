@@ -1,21 +1,9 @@
-const closeBtn = document.getElementById("close");
-const menu = document.getElementById("menu");
-const navMenu = document.getElementById("nav-menu");
-const counter = document.getElementById("counter");
-const iconPlus = document.getElementById("icon-plus");
-const iconMinus = document.getElementById("icon-minus");
-const backdrop = document.getElementById("lightbox");
-const hideBackdrop = document.getElementById("close-lightbox");
-const images = document.querySelectorAll(".light-box-image");
 const thumbBtns = document.querySelectorAll(".thumbnails");
-const img = document.getElementById("lightbox-image");
-const heroImg = document.getElementById("main-img");
 const cartImg = document.getElementById("cart-img");
 const prevBtns = document.querySelectorAll(".previous");
 const nextBtns = document.querySelectorAll(".next");
 
 // -------------------- Cart-related --------------------
-// Cart Toggle and Interactions
 const cart = document.getElementById("cart");
 const previewCard = document.getElementById("card");
 const addCart = document.getElementById("add-to-cart");
@@ -60,16 +48,28 @@ removeItem.addEventListener("click", () => {
     emptyCart.classList.remove("hidden");
 });
 
-menu.addEventListener("click", () => {
-    navMenu.classList.remove("hidden");
-    closeBtn.classList.remove("hidden");
+// ------------------Mobile Menu ------------------
+// Menu Toggle
+const hamMenu = document.getElementById("menu");
+const sideNav = document.getElementById("nav-menu");
+const closeBtn = document.getElementById("close");
+
+// on clicking the hamburger icon, show the menu
+hamMenu.addEventListener("click", () => {
+    sideNav.classList.remove("hidden"); // show sideNav
+    closeBtn.classList.remove("hidden"); // btn to close sideNav
 });
 
 closeBtn.addEventListener("click", () => {
-    navMenu.classList.add("hidden");
+    sideNav.classList.add("hidden");
     closeBtn.classList.add("hidden");
     backdrop.classList.add("hidden");
 });
+
+// -------------------- Product Counter --------------------
+const counter = document.getElementById("counter");
+const iconPlus = document.getElementById("icon-plus");
+const iconMinus = document.getElementById("icon-minus");
 
 iconPlus.addEventListener("click", () => {
     counter.textContent = Number(counter.textContent) + 1;
@@ -89,7 +89,12 @@ document.onclick = function (e) {
     }
 };
 
-// Lightbox
+// -----------------Lightbox Toggle  --------------------
+const backdrop = document.getElementById("lightbox");
+const hideBackdrop = document.getElementById("close-lightbox");
+const images = document.querySelectorAll(".light-box-image");
+const img = document.getElementById("lightbox-image");
+const heroImg = document.getElementById("main-img");
 
 hideBackdrop.addEventListener("click", () => {
     backdrop.classList.add("hidden");
@@ -99,6 +104,7 @@ heroImg.addEventListener("click", () => {
     backdrop.classList.remove("hidden");
 });
 
+// display lightbox if img is clicked in desktop mode
 images.forEach((image) => {
     image.addEventListener("click", () => {
         backdrop.classList.remove("hidden");
