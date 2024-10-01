@@ -24,7 +24,7 @@ tailwind.config = {
                 },
             },
             animation: {
-                slidein: "slidein .3s ease-in-out",
+                slidein: "slidein .45s ease-in-out",
                 zoom: "zoom .15s ease-in-out",
             },
             boxShadow: {
