@@ -10,7 +10,7 @@
             sizes="32x32"
             href="./images/favicon-32x32.png"
         />
-        <title>Frontend Mentor | E-commerce product page</title>
+        <title>Sneakers Ecommerce Website</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="tailwind-config.js"></script>
         <style type="text/tailwindcss">
@@ -28,11 +28,11 @@
                 transition: color 0.3s ease; /* Smooth transition for text color */
             }
 
-            .card {
+            .cart-card {
                 @apply min-w-[96%] container w-64 h-auto lg:h-52 absolute z-20 top-20 right-0 left-0 rounded-md shadow-lg bg-white overflow-hidden mx-auto lg:min-w-0 lg:top-14 lg:left-auto lg:-right-12 lg:mx-0 animate-zoom;
             }
 
-            .sidenav {
+            .side-nav {
                 @apply lg:relative lg:left-0 lg:min-h-0 lg:animate-none lg:bg-transparent bg-white lg:pl-0 lg:pt-0 fixed -left-5 top-0 w-[75%] z-50  min-h-screen pl-14 pt-8 animate-slidein lg:block lg:shadow-none shadow-3xl;
             }
 
@@ -63,7 +63,7 @@
 
                 <img src="images/logo.svg" alt="" />
 
-                <div class="sidenav hidden" id="nav-menu">
+                <div class="side-nav hidden" id="nav-menu">
                     <img
                         src="images/icons/icon-close.svg"
                         alt="close"
@@ -105,8 +105,8 @@
                 />
             </div>
 
-            <!-- Modal Card -->
-            <div class="card hidden" id="card">
+            <!-- Modal cart-card -->
+            <div class="cart-card hidden" id="cart-card">
                 <h2 class="border-b p-3 text-sm text-black font-bold">Cart</h2>
 
                 <!-- When Cart is Empty -->
@@ -166,34 +166,20 @@
                     <button
                         class="relative left-0 bg-white hover:text-orange h-10 w-10 p-1 rounded-full flex items-center previous"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-8 w-8"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                        >
-                            <path
-                                fill-rule="evenodd"
-                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                clip-rule="evenodd"
-                            />
-                        </svg>
+                        <img
+                            src="/images/icons/icon-previous.svg"
+                            alt="Previous icon"
+                            class="ml-2"
+                        />
                     </button>
                     <button
                         class="relative right-0 bg-white hover:text-orange h-10 w-10 p-1 rounded-full flex items-center next"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-8 w-8"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                        >
-                            <path
-                                fill-rule="evenodd"
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd"
-                            />
-                        </svg>
+                        <img
+                            src="/images/icons/icon-next.svg"
+                            alt="Next icon"
+                            class="ml-3"
+                        />
                     </button>
                 </div>
 
