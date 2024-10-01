@@ -1,140 +1,141 @@
 // -------------------- Cart-related --------------------
-const cart = document.getElementById("cart");
-const previewCard = document.getElementById("card");
-const addCart = document.getElementById("add-to-cart");
-const cartNumber = document.getElementById("cart-number");
-const numOfItems = document.getElementById("number-of-items");
-const checkout = document.getElementById("checkout");
-const amount = document.getElementById("amount");
-const emptyCart = document.getElementById("empty-cart");
-const cartInfo = document.getElementById("cart-info");
-const removeItem = document.getElementById("icon-delete");
+const shoppingCart = document.getElementById("cart");
+const productPreview = document.getElementById("card");
+const addToCartBtn = document.getElementById("add-to-cart");
+const itemCount = document.getElementById("cart-number");
+const totalItems = document.getElementById("number-of-items");
+const checkoutBtn = document.getElementById("checkout");
+const totalAmountDisplay = document.getElementById("amount");
+const clearCartBtn = document.getElementById("empty-cart");
+const cartDetails = document.getElementById("cart-info");
+const deleteItemBtn = document.getElementById("icon-delete");
 
-cart.addEventListener("click", () => {
-    previewCard.classList.toggle("hidden");
+shoppingCart.addEventListener("click", () => {
+    productPreview.classList.toggle("hidden");
 });
 
-addCart.addEventListener("click", () => {
+addToCartBtn.addEventListener("click", () => {
     // Show number of items ordered in cart if order is greater than one else hide the number of items
     if (counter.textContent > 0) {
-        cartNumber.classList.remove("hidden");
-        cartNumber.textContent = 1;
-        emptyCart.classList.add("hidden");
-        cartInfo.classList.remove("hidden");
+        itemCount.classList.remove("hidden");
+        itemCount.textContent = 1;
+        clearCartBtn.classList.add("hidden");
+        cartDetails.classList.remove("hidden");
     } else {
-        cartNumber.classList.add("hidden");
-        cartInfo.classList.add("hidden");
-        emptyCart.classList.remove("hidden");
+        itemCount.classList.add("hidden");
+        cartDetails.classList.add("hidden");
+        clearCartBtn.classList.remove("hidden");
     }
 
     // Update the number of items in cart modal
-    numOfItems.textContent = counter.textContent;
+    totalItems.textContent = counter.textContent;
 
     // Calculate the total amount to be paid
-    let totalAmount = Number(amount.textContent) * numOfItems.textContent;
-    checkout.textContent = `$${totalAmount.toFixed(2)}`;
+    let calculatedAmount =
+        Number(totalAmountDisplay.textContent) * totalItems.textContent;
+    checkoutBtn.textContent = `$${calculatedAmount.toFixed(2)}`;
     counter.textContent = 0;
 });
 
-removeItem.addEventListener("click", () => {
+deleteItemBtn.addEventListener("click", () => {
     counter.textContent = 0;
-    cartNumber.classList.add("hidden");
-    cartInfo.classList.add("hidden");
-    emptyCart.classList.remove("hidden");
+    itemCount.classList.add("hidden");
+    cartDetails.classList.add("hidden");
+    clearCartBtn.classList.remove("hidden");
 });
 
 // ------------------Mobile Menu ------------------
 // Menu Toggle
-const hamMenu = document.getElementById("menu");
-const sideNav = document.getElementById("nav-menu");
-const closeBtn = document.getElementById("close");
+const hamburgerMenu = document.getElementById("menu");
+const sidebarNav = document.getElementById("nav-menu");
+const closeSidebarBtn = document.getElementById("close");
 
 // on clicking the hamburger icon, show the menu
-hamMenu.addEventListener("click", () => {
-    sideNav.classList.remove("hidden"); // show sideNav
-    closeBtn.classList.remove("hidden"); // btn to close sideNav
+hamburgerMenu.addEventListener("click", () => {
+    sidebarNav.classList.remove("hidden"); // show sidebarNav
+    closeSidebarBtn.classList.remove("hidden"); // btn to close sidebarNav
 });
 
-closeBtn.addEventListener("click", () => {
-    sideNav.classList.add("hidden");
-    closeBtn.classList.add("hidden");
+closeSidebarBtn.addEventListener("click", () => {
+    sidebarNav.classList.add("hidden");
+    closeSidebarBtn.classList.add("hidden");
     backdrop.classList.add("hidden");
 });
 
 // -------------------- Product Counter --------------------
-const counter = document.getElementById("counter");
-const iconPlus = document.getElementById("icon-plus");
-const iconMinus = document.getElementById("icon-minus");
+const quantityCounter = document.getElementById("counter");
+const incrementBtn = document.getElementById("icon-plus");
+const decrementBtn = document.getElementById("icon-minus");
 
-iconPlus.addEventListener("click", () => {
-    counter.textContent = Number(counter.textContent) + 1;
+incrementBtn.addEventListener("click", () => {
+    quantityCounter.textContent = Number(quantityCounter.textContent) + 1;
 });
 
-iconMinus.addEventListener("click", () => {
-    counter.textContent = Number(counter.textContent) - 1;
-    if (counter.textContent < 0) {
-        counter.textContent = 0;
+decrementBtn.addEventListener("click", () => {
+    quantityCounter.textContent = Number(quantityCounter.textContent) - 1;
+    if (quantityCounter.textContent < 0) {
+        quantityCounter.textContent = 0;
     }
 });
 
 // -----------------Lightbox Toggle  --------------------
-const backdrop = document.getElementById("lightbox");
-const closeLightboxBtn = document.getElementById("close-lightbox");
-const images = document.querySelectorAll(".light-box-image");
-const img = document.getElementById("lightbox-image");
-const heroImg = document.getElementById("main-img");
+const lightboxBackdrop = document.getElementById("lightbox");
+const closeLightboxButton = document.getElementById("close-lightbox");
+const lightboxImages = document.querySelectorAll(".light-box-image");
+const lightboxImage = document.getElementById("lightbox-image");
+const mainProductImage = document.getElementById("main-img");
 
 // show lightbox
-heroImg.addEventListener("click", () => {
-    backdrop.classList.remove("hidden");
+mainProductImage.addEventListener("click", () => {
+    lightboxBackdrop.classList.remove("hidden");
 });
 
 // close lightbox
-closeLightboxBtn.addEventListener("click", () => {
-    backdrop.classList.add("hidden");
+closeLightboxButton.addEventListener("click", () => {
+    lightboxBackdrop.classList.add("hidden");
 });
 
 // display lightbox if img is clicked in desktop mode
-images.forEach((image) => {
+lightboxImages.forEach((image) => {
     image.addEventListener("click", () => {
-        backdrop.classList.remove("hidden");
-        img.src = image.src;
-        heroImg.src = image.src;
+        lightboxBackdrop.classList.remove("hidden");
+        lightboxImage.src = image.src;
+        mainProductImage.src = image.src;
     });
 });
 
 // -------------------- Thumbnail Slider --------------------
-const thumbBtns = document.querySelectorAll(".thumbnails");
-const cartImg = document.getElementById("cart-img");
-const prevBtns = document.querySelectorAll(".previous");
-const nextBtns = document.querySelectorAll(".next");
-let imageGallery = [
+const thumbnailButtons = document.querySelectorAll(".thumbnails");
+const cartProductImage = document.getElementById("cart-img");
+const previousButtons = document.querySelectorAll(".previous");
+const nextButtons = document.querySelectorAll(".next");
+let productImages = [
     "images/product/image-product-1.jpg",
     "images/product/image-product-2.jpg",
     "images/product/image-product-3.jpg",
     "images/product/image-product-4.jpg",
 ];
 
-let current_image_index = 0;
+let currentImageIndex = 0;
 
-nextBtns.forEach((nextBtn) => {
+nextButtons.forEach((nextBtn) => {
     nextBtn.addEventListener("click", () => {
         console.log("clicked!");
-        current_image_index += 1;
-        if (current_image_index < imageGallery.length) {
-            heroImg.src = imageGallery[current_image_index];
-            cartImg.src = imageGallery[current_image_index];
-            img.src = imageGallery[current_image_index];
+        currentImageIndex += 1;
+        if (currentImageIndex < productImages.length) {
+            mainProductImage.src = productImages[currentImageIndex];
+            cartProductImage.src = productImages[currentImageIndex];
+            lightboxImage.src = productImages[currentImageIndex];
         } else {
-            current_image_index = 0;
+            currentImageIndex = 0;
 
-            heroImg.src = imageGallery[current_image_index];
-            cartImg.src = imageGallery[current_image_index];
-            img.src = imageGallery[current_image_index];
+            mainProductImage.src = productImages[currentImageIndex];
+            cartProductImage.src = productImages[currentImageIndex];
+            lightboxImage.src = productImages[currentImageIndex];
         }
 
-        thumbBtns.forEach((thumb) => {
-            if (thumb.src == heroImg.src) {
+        thumbnailButtons.forEach((thumb) => {
+            if (thumb.src === mainProductImage.src) {
                 thumb.classList.add("active-thumbnail");
             } else {
                 thumb.classList.remove("active-thumbnail");
@@ -143,26 +144,26 @@ nextBtns.forEach((nextBtn) => {
     });
 });
 
-prevBtns.forEach((prevBtn) => {
-    current_image_index = 4;
+previousButtons.forEach((prevBtn) => {
+    currentImageIndex = 4;
     prevBtn.addEventListener("click", () => {
-        if (current_image_index <= 0) {
-            current_image_index = 4;
-            current_image_index -= 1;
+        if (currentImageIndex <= 0) {
+            currentImageIndex = 4;
+            currentImageIndex -= 1;
 
-            heroImg.src = imageGallery[current_image_index];
-            cartImg.src = imageGallery[current_image_index];
-            img.src = imageGallery[current_image_index];
+            mainProductImage.src = productImages[currentImageIndex];
+            cartProductImage.src = productImages[currentImageIndex];
+            lightboxImage.src = productImages[currentImageIndex];
         } else {
-            current_image_index -= 1;
+            currentImageIndex -= 1;
 
-            heroImg.src = imageGallery[current_image_index];
-            cartImg.src = imageGallery[current_image_index];
-            img.src = imageGallery[current_image_index];
+            mainProductImage.src = productImages[currentImageIndex];
+            cartProductImage.src = productImages[currentImageIndex];
+            lightboxImage.src = productImages[currentImageIndex];
         }
 
-        thumbBtns.forEach((thumb) => {
-            if (thumb.src == heroImg.src) {
+        thumbnailButtons.forEach((thumb) => {
+            if (thumb.src === mainProductImage.src) {
                 thumb.classList.add("active-thumbnail");
             } else {
                 thumb.classList.remove("active-thumbnail");
@@ -171,12 +172,14 @@ prevBtns.forEach((prevBtn) => {
     });
 });
 
-thumbBtns.forEach((thumb) => {
+thumbnailButtons.forEach((thumb) => {
     thumb.addEventListener("click", () => {
-        thumbBtns.forEach((btn) => btn.classList.remove("active-thumbnail"));
+        thumbnailButtons.forEach((btn) =>
+            btn.classList.remove("active-thumbnail")
+        );
         thumb.classList.add("active-thumbnail");
-        heroImg.src = thumb.src;
-        cartImg.src = thumb.src;
-        img.src = thumb.src;
+        mainProductImage.src = thumb.src;
+        cartProductImage.src = thumb.src;
+        lightboxImage.src = thumb.src;
     });
 });
