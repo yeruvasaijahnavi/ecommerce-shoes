@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="./images/favicon-32x32.png"
+        />
+        <title>Frontend Mentor | E-commerce product page</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            orange: "hsl(26, 100%, 55%)",
+                            paleorange: "hsl(25, 100%, 94%)",
+                            darkblue: "hsl(220, 13%, 13%)",
+                            dark_grayish_blue: "hsl(219, 9%, 45%)",
+                            grayish_blue: "hsl(220, 14%, 75%)",
+                            lightgrayblue: "hsl(223, 64%, 98%)",
+                            attribution: "hsl(228, 45%, 44%)",
+                        },
+                        fontFamily: {
+                            body: ["Kumbh Sans"],
+                        },
+                        keyframes: {
+                            slidein: {
+                                "0%": { transform: "translateX(-100%)" },
+                                "100%": { transform: "translateX(0%)" },
+                            },
+                            zoom: {
+                                "0%": { transform: "scale(0)" },
+                                "100%": { transform: "scale(1)" },
+                            },
+                        },
+                        animation: {
+                            slidein: "slidein .08s ease-in-out",
+                            zoom: "zoom .15s ease-in-out",
+                        },
+                        boxShadow: {
+                            "3xl": "0 0 0 10000px rgba(0,0,0,0.75)",
+                        },
+                    },
+                },
+            };
+        </script>
+
+        <style type="text/tailwindcss">
+            @import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap");
+
+            @tailwind base;
+            @tailwind components;
+            @tailwind utilities;
+
+            /* CUSTSOM CLASSES */
+            .nav-link {
+                @apply lg:text-grayish_blue lg:hover:text-black relative lg:after:absolute lg:after:left-0 lg:after:w-0 lg:after:h-[3px] lg:after:-bottom-7 lg:after:bg-orange lg:hover:after:w-full lg:hover:after:transition-[width] hover:after:duration-300 hover:after:ease-in-out pb-4 lg:pb-0 cursor-pointer text-black
+          font-bold lg:font-normal;
+            }
+
+            .card {
+                @apply min-w-[96%] container w-64 h-auto lg:h-52 absolute z-20 top-20 right-0 left-0 rounded-md shadow-lg bg-white overflow-hidden mx-auto lg:min-w-0 lg:top-14 lg:left-auto lg:-right-12 lg:mx-0 animate-zoom;
+            }
+
+            .sidenav {
+                @apply lg:relative lg:left-0 lg:min-h-0 lg:animate-none lg:bg-transparent bg-white lg:pl-0 lg:pt-0 fixed -left-5 top-0 w-[75%] z-50  min-h-screen pl-14 pt-8 animate-slidein lg:block lg:shadow-none shadow-3xl;
+            }
+
+            .bigBtn {
+                @apply flex items-center justify-center bg-orange py-2 px-6 gap-4 text-white cursor-pointer rounded-md text-sm lg:hover:bg-orange/50 w-full;
+            }
+
+            .container-body {
+                @apply min-h-screen lg:w-4/5 xl:w-[67%] w-full lg:container lg:mx-auto lg:px-5 relative z-10;
+            }
+
+            .active-thumbnail {
+                @apply border-2 border-orange opacity-50;
+            }
+        </style>
+    </head>
+    <body class="font-body container-body">
+        <header
+            class="flex items-center justify-between py-5 lg:border-b relative w-full z-10 px-5 lg:px-0"
+        >
+            <div class="flex items-center justify-center gap-3">
+                <img
+                    class="lg:hidden block cursor-pointer shadow-lg"
+                    src="images/icons/icon-menu.svg"
+                    alt="Hamburger Menu Icon"
+                    id="menu"
+                />
+
+                <img src="images/logo.svg" alt="" />
+
+                <div class="sidenav hidden" id="nav-menu">
+                    <img
+                        src="images/icons/icon-close.svg"
+                        alt="close"
+                        id="close"
+                        class="cursor-pointer lg:hidden"
+                    />
+
+                    <ul
+                        class="lg:ml-10 lg:mt-0 mt-10 items-center gap-3 lg:flex text-sm"
+                    >
+                        <li class="nav-link"><a href="/">Collections</a></li>
+                        <li class="nav-link"><a href="/">Men</a></li>
+                        <li class="nav-link"><a href="/">Women</a></li>
+                        <li class="nav-link"><a href="/">About</a></li>
+                        <li class="nav-link"><a href="/">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-8">
+                <div class="relative cursor-pointer">
+                    <img
+                        class="cursor-pointer"
+                        src="images/icons/icon-cart.svg"
+                        alt="icon-cart"
+                        id="cart"
+                    />
+                    <span
+                        class="hidden absolute -top-1 text-center -right-2 rounded-full h-3.5 w-5 bg-orange text-white text-xs font-bold"
+                        id="cart-number"
+                        >0</span
+                    >
+                </div>
+
+                <img
+                    class="h-8 w-8 cursor-pointer border-2 hover:border-orange rounded-full"
+                    src="images/image-avatar.png"
+                    alt="image-avatar"
+                />
+            </div>
+
+            <!-- Modal Card -->
+            <div class="card hidden" id="card">
+                <h2 class="border-b p-3 text-sm text-black font-bold">Cart</h2>
+
+                <!-- When Cart is Empty -->
+                <div
+                    class="h-40 flex justify-center items-center"
+                    id="empty-cart"
+                >
+                    <p class="font-bold text-grayish_blue text-sm">
+                        Your cart is empty.
+                    </p>
+                </div>
+
+                <!-- When Cart has an item/items in it -->
+                <section class="hidden p-5 flex flex-col gap-12" id="cart-info">
+                    <div class="flex items-center w-full gap-4">
+                        <img
+                            class="h-10 w-10 rounded-md"
+                            src="images/product/image-product-1.jpg"
+                            alt="image-product-1"
+                            id="cart-img"
+                        />
+                        <div class="flex items-center justify-between w-full">
+                            <div class="text-grayish_blue text-xs">
+                                <p>Autum Limited Edition...</p>
+                                <p>
+                                    $<span id="amount">125.00</span> x
+                                    <span id="number-of-items"></span
+                                    ><span
+                                        id="checkout"
+                                        class="font-bold pl-2 text-black"
+                                    ></span>
+                                </p>
+                            </div>
+
+                            <img
+                                src="images/icons/icon-delete.svg"
+                                alt="icon-delete"
+                                id="icon-delete"
+                                class="cursor-pointer"
+                            />
+                        </div>
+                    </div>
+                    <button class="bigBtn">Checkout</button>
+                </section>
+            </div>
+        </header>
+
+        <main
+            class="flex flex-col lg:flex-row items-center lg:gap-28 p-0 lg:p-16"
+        >
+            <!-- Image Section -->
+            <section class="relative h-[20%]" id="image-section">
+                <!-- Slideshow buttons -->
+                <div
+                    class="absolute top-[50%] bottom-[50%] w-full flex items-center justify-between px-4 lg:hidden"
+                >
+                    <button
+                        class="relative left-0 bg-white h-10 w-10 p-1 rounded-full flex items-center previous"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-8 w-8"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                clip-rule="evenodd"
+                            />
+                        </svg>
+                    </button>
+                    <button
+                        class="relative right-0 bg-white h-10 w-10 p-1 rounded-full flex items-center next"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-8 w-8"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                clip-rule="evenodd"
+                            />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Image area -->
+                <div class="h-3/4 lg:mb-8 mb-2">
+                    <img
+                        class="lg:light-box-image lg:rounded-xl h-full w-full lg:cursor-pointer"
+                        src="images/product/image-product-1.jpg"
+                        alt="image-1"
+                        id="main-img"
+                    />
+                </div>
+
+                <!-- Image Thumbnails -->
+                <div class="lg:flex gap-8 items-center hidden">
+                    <div class="">
+                        <img
+                            class="active-thumbnail rounded-md h-full hover:opacity-50 cursor-pointer thumbnails"
+                            src="images/product/image-product-1.jpg"
+                            alt="image-product-1"
+                        />
+                    </div>
+                    <div class="">
+                        <img
+                            class="rounded-md h-full hover:opacity-50 cursor-pointer thumbnails"
+                            src="images/product/image-product-2.jpg"
+                            alt="image-product-2"
+                        />
+                    </div>
+                    <div class="">
+                        <img
+                            class="rounded-md h-full hover:opacity-50 cursor-pointer thumbnails"
+                            src="images/product/image-product-3.jpg"
+                            alt="image-product-3"
+                        />
+                    </div>
+                    <div class="">
+                        <img
+                            class="rounded-md h-full hover:opacity-50 cursor-pointer thumbnails"
+                            src="images/product/image-product-4.jpg"
+                            alt="image-product-4"
+                        />
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hero Text Section -->
+            <section class="pt-2 px-8 lg:px-0 h-[80%] w-full" id="hero-text">
+                <h6
+                    class="text-sm tracking-widest uppercase text-orange font-bold"
+                >
+                    sneaker company
+                </h6>
+                <h1 class="lg:text-4xl text-3xl font-bold capitalize my-3">
+                    Fall limited edition sneakers
+                </h1>
+
+                <p class="my-2 text-xs text-dark_grayish_blue">
+                    These low-profile sneakers are your perfect casual wear
+                    companion. Featuring a durable rubber outer sole, they’ll
+                    withstand everything the weather can offer.
+                </p>
+
+                <div
+                    class="flex lg:flex-col lg:items-start lg:justify-start items-center justify-between gap-3 pb-1"
+                >
+                    <div class="flex items-center gap-3 my-2">
+                        <span class="text-2xl font-bold"> $125.00</span>
+                        <span
+                            class="rounded-sm text-sm bg-paleorange text-orange px-[5px]"
+                            >50%</span
+                        >
+                    </div>
+                    <p class="text-sm text-grayish_blue line-through font-bold">
+                        $250.00
+                    </p>
+                </div>
+
+                <div class="md:flex items-center gap-4 py-4 px-1">
+                    <div
+                        class="flex items-center justify-between gap-4 py-1 bg-lightgrayblue rounded-md w-full lg:w-44 md:mb-0 mb-4 lg:mb-0"
+                    >
+                        <button
+                            class="p-2 rounded-md cursor-pointer w-full flex justify-center"
+                            id="icon-minus"
+                        >
+                            <img
+                                src="images/icons/icon-minus.svg"
+                                alt="icon-minus"
+                            />
+                        </button>
+                        <span class="font-bold w-full text-center" id="counter"
+                            >0</span
+                        >
+                        <button
+                            class="p-2 rounded-md cursor-pointer w-full flex justify-center"
+                            id="icon-plus"
+                        >
+                            <img
+                                src="images/icons/icon-plus.svg"
+                                alt="icon-plus"
+                            />
+                        </button>
+                    </div>
+
+                    <button
+                        class="shadow-lg shadow-orange/50 bigBtn"
+                        id="add-to-cart"
+                    >
+                        <svg
+                            width="22"
+                            height="20"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"
+                                fill="white"
+                                fill-rule="nonzero"
+                            />
+                        </svg>
+                        Add to cart
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <!-- LightBox -->
+        <section
+            id="lightbox"
+            class="transition-opacity opacity-0 lg:opacity-100 hidden fixed z-[60] top-0 left-0 right-0 w-full h-screen bg-black/75 flex items-center justify-center animate-zoom"
+        >
+            <div class="max-w-[450px] relative">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="absolute right-0 -top-10 text-right h-6 w-6 text-white hover:text-orange cursor-pointer"
+                    id="close-lightbox"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"
+                    />
+                </svg>
+
+                <img
+                    src="images/product/image-product-1.jpg"
+                    class="h-[400px] rounded-xl"
+                    id="lightbox-image"
+                    alt="light-box-image"
+                />
+
+                <!-- Slider buttons -->
+                <div
+                    class="absolute bottom-[55%] w-full flex items-center justify-between"
+                >
+                    <button
+                        class="relative -left-5 bg-white h-10 w-10 p-1 rounded-full flex items-center hover:text-orange previous"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-8 w-8"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                clip-rule="evenodd"
+                            />
+                        </svg>
+                    </button>
+                    <button
+                        class="relative -right-5 bg-white h-10 w-10 p-1 rounded-full flex items-center hover:text-orange next"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-8 w-8"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                clip-rule="evenodd"
+                            />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- image thumbnails -->
+                <div
+                    class="lg:flex gap-8 items-center hidden justify-center mt-8"
+                >
+                    <div>
+                        <img
+                            class="active-thumbnail h-16 rounded-md hover:opacity-50 cursor-pointer light-box-image thumbnails"
+                            src="images/product/image-product-1.jpg"
+                            alt="image-product-1"
+                        />
+                    </div>
+                    <div>
+                        <img
+                            class="rounded-md h-16 hover:opacity-50 cursor-pointer light-box-image thumbnails"
+                            src="images/product/image-product-2.jpg"
+                            alt="image-product-2"
+                        />
+                    </div>
+                    <div>
+                        <img
+                            class="rounded-md h-16 hover:opacity-50 cursor-pointer light-box-image thumbnails"
+                            src="images/product/image-product-3.jpg"
+                            alt="image-product-3"
+                        />
+                    </div>
+                    <div>
+                        <img
+                            class="rounded-md h-16 hover:opacity-50 cursor-pointer light-box-image thumbnails"
+                            src="images/product/image-product-4.jpg"
+                            alt="image-product-4"
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="text-center">
+            Challenge by
+            <a
+                href="https://www.frontendmentor.io?ref=challenge"
+                target="_blank"
+                >Frontend Mentor</a
+            >. Coded by
+            <a href="#" class="text=attribution">Yeruva Sai Jahnavi</a>.
+        </footer>
+        <script src="main.js"></script>
+    </body>
+</html>
