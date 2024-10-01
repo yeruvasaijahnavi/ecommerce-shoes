@@ -1,6 +1,6 @@
 // -------------------- Cart-related --------------------
 const shoppingCart = document.getElementById("cart");
-const cartPreview = document.getElementById("card");
+const cartPreview = document.getElementById("cart-card");
 const addToCartBtn = document.getElementById("add-to-cart");
 const itemCount = document.getElementById("cart-number");
 const totalItems = document.getElementById("number-of-items");
@@ -56,7 +56,7 @@ deleteItemBtn.addEventListener("click", () => {
     clearCartBtn.classList.remove("hidden");
 });
 
-// Click anywhere outside card to close
+// Click anywhere outside cart-card to close
 document.onclick = function (e) {
     if (e.target.id !== "cart") {
         cartPreview.classList.add("hidden");
