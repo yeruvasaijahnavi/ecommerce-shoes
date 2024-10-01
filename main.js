@@ -1,19 +1,9 @@
-const cart = document.getElementById("cart");
-const previewCard = document.getElementById("card");
 const closeBtn = document.getElementById("close");
 const menu = document.getElementById("menu");
 const navMenu = document.getElementById("nav-menu");
 const counter = document.getElementById("counter");
 const iconPlus = document.getElementById("icon-plus");
 const iconMinus = document.getElementById("icon-minus");
-const addCart = document.getElementById("add-to-cart");
-const cartNumber = document.getElementById("cart-number");
-const numOfItems = document.getElementById("number-of-items");
-const checkout = document.getElementById("checkout");
-const amount = document.getElementById("amount");
-const emptyCart = document.getElementById("empty-cart");
-const cartInfo = document.getElementById("cart-info");
-const removeItem = document.getElementById("icon-delete");
 const backdrop = document.getElementById("lightbox");
 const hideBackdrop = document.getElementById("close-lightbox");
 const images = document.querySelectorAll(".light-box-image");
@@ -24,30 +14,21 @@ const cartImg = document.getElementById("cart-img");
 const prevBtns = document.querySelectorAll(".previous");
 const nextBtns = document.querySelectorAll(".next");
 
+// -------------------- Cart-related --------------------
+// Cart Toggle and Interactions
+const cart = document.getElementById("cart");
+const previewCard = document.getElementById("card");
+const addCart = document.getElementById("add-to-cart");
+const cartNumber = document.getElementById("cart-number");
+const numOfItems = document.getElementById("number-of-items");
+const checkout = document.getElementById("checkout");
+const amount = document.getElementById("amount");
+const emptyCart = document.getElementById("empty-cart");
+const cartInfo = document.getElementById("cart-info");
+const removeItem = document.getElementById("icon-delete");
+
 cart.addEventListener("click", () => {
     previewCard.classList.remove("hidden");
-});
-
-menu.addEventListener("click", () => {
-    navMenu.classList.remove("hidden");
-    closeBtn.classList.remove("hidden");
-});
-
-closeBtn.addEventListener("click", () => {
-    navMenu.classList.add("hidden");
-    closeBtn.classList.add("hidden");
-    backdrop.classList.add("hidden");
-});
-
-iconPlus.addEventListener("click", () => {
-    counter.textContent = Number(counter.textContent) + 1;
-});
-
-iconMinus.addEventListener("click", () => {
-    counter.textContent = Number(counter.textContent) - 1;
-    if (counter.textContent < 0) {
-        counter.textContent = 0;
-    }
 });
 
 addCart.addEventListener("click", () => {
@@ -77,6 +58,28 @@ removeItem.addEventListener("click", () => {
     cartNumber.classList.add("hidden");
     cartInfo.classList.add("hidden");
     emptyCart.classList.remove("hidden");
+});
+
+menu.addEventListener("click", () => {
+    navMenu.classList.remove("hidden");
+    closeBtn.classList.remove("hidden");
+});
+
+closeBtn.addEventListener("click", () => {
+    navMenu.classList.add("hidden");
+    closeBtn.classList.add("hidden");
+    backdrop.classList.add("hidden");
+});
+
+iconPlus.addEventListener("click", () => {
+    counter.textContent = Number(counter.textContent) + 1;
+});
+
+iconMinus.addEventListener("click", () => {
+    counter.textContent = Number(counter.textContent) - 1;
+    if (counter.textContent < 0) {
+        counter.textContent = 0;
+    }
 });
 
 // Click outside an area to close
