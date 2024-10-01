@@ -22,8 +22,10 @@
 
             /* CUSTSOM CLASSES */
             .nav-link {
-                @apply lg:text-grayish_blue lg:hover:text-black relative lg:after:absolute lg:after:left-0 lg:after:w-0 lg:after:h-[3px] lg:after:-bottom-7 lg:after:bg-orange lg:hover:after:w-full lg:hover:after:transition-[width] hover:after:duration-300 hover:after:ease-in-out pb-4 lg:pb-0 cursor-pointer text-black
-          font-bold lg:font-normal;
+                @apply lg:text-grayish_blue lg:hover:text-black relative cursor-pointer font-bold lg:font-normal lg:after:absolute lg:after:left-0 lg:after:w-0 lg:after:h-[3px] lg:after:-bottom-7 lg:after:bg-orange lg:hover:after:w-full lg:hover:after:transition-all lg:hover:after:duration-500 lg:hover:after:ease-in-out pb-4 lg:pb-0;
+
+                /* Ensure text color transition is smooth */
+                transition: color 0.3s ease; /* Smooth transition for text color */
             }
 
             .card {
