@@ -33,15 +33,15 @@ Users should be able to:
 
 #### Desktop Mode
 
-![desktop screenshot](images\screenshots\desktop.png)
+![desktop screenshot](images/screenshots/desktop.png)
 
 #### LightBox
 
-![lightbox screenshot](images\screenshots\lightbox.png)
+![lightbox screenshot](images/screenshots/lightbox.png)
 
 #### Mobile Mode
 
-![mobile screenshot](images\screenshots\mobile.jpeg)
+![mobile screenshot](images/screenshots/mobile.jpeg)
 
 ### Links
 
